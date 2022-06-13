@@ -1,4 +1,4 @@
-console.log('carregou GH');
+console.log('carregou GH desktop');
 
 // Show → Hide Content
 // setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
