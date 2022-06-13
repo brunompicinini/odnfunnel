@@ -1,5 +1,5 @@
 // Show → Hide Content
-setTimeout(function() {$('.odnHide').attr("style", "display: none !important")}, 5000);
+setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
 
 // Hide → Show Content
 setTimeout(function() {$('.odnHide').attr("style", "display: block !important")}, 10000);
@@ -21,11 +21,12 @@ $(document).ready(()=>{
   });
 });
 
-if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')){
-  setTimeout(()=>{
-    window.location.href = 'https://odontologista.activehosted.com/f/6?email='+$('input[type="email"]').val();
-  },1000);
-}
+// Aqui tem que pensar se consigo fazer pra todos ou página por página. Talvez 'domain' + /quiz(input email), porque seria pra esse tipo né.
+// if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')){
+//   setTimeout(()=>{
+//     window.location.href = 'https://odontologista.activehosted.com/f/6?email='+$('input[type="email"]').val();
+//   },1000);
+// }
 
 // Isso vai ser definido na página, assim como o link para próxima página do if se precisar
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
