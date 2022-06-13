@@ -10,8 +10,6 @@ if(/(^|;)\s*cookie_lp=/.test(document.cookie)){var divs=document.querySelectorAl
 // Optin com dados UTM
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-// Aqui daria pra pegar a URL e colocar aqui
-// var content_piece = 'Vídeo 1.0 + Popup Optin';
 $(document).ready(()=>{
   $('button.btn').on('click',()=>{
     $('form').append(`<input type="hidden" name="field[12]" value="${urlParams.get('utm_source')}">`);
@@ -28,3 +26,6 @@ if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val(
     window.location.href = 'https://odontologista.activehosted.com/f/6?email='+$('input[type="email"]').val();
   },1000);
 }
+
+// Isso vai ser definido na página, assim como o link para próxima página do if se precisar
+// var content_piece = 'Vídeo 1.0 + Popup Optin';
