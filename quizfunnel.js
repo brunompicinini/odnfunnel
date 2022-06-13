@@ -1,3 +1,5 @@
+console.log('carregou GH');
+
 // Show → Hide Content
 // setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
 
