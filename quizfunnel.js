@@ -1,4 +1,4 @@
-console.log('carregou GH desktop');
+console.log('carregou GH atom');
 
 // Show → Hide Content
 // setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
