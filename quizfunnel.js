@@ -1,17 +1,49 @@
-console.log('carregou GH atom2');
+// console.log('teste erro');
+
+/* SHOW / HIDE CONTENT */
 
 // Show → Hide Content
-// setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
+setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
 
 // Hide → Show Content
-// setTimeout(function() {$('.odnHide').attr("style", "display: block !important")}, 10000);
+setTimeout(function() {$('.odnHide').attr("style", "display: block !important")}, 7000);
 
 // Cookie 365 Days
 // if(/(^|;)\s*cookie_lp=/.test(document.cookie)){var divs=document.querySelectorAll(".odnhide");[].forEach.call(divs,function(e){e.style.setProperty("display", "block", "important")})}else document.cookie="cookie_lp=true; max-age=31536000";
 
+
+/* FBQ PURCHASES */
+
+// Purchase por página
+let urlQuiz = 'quiz';
+let urlResultados = 'resultados';
+let urlRedirecionando = 'redirecionando';
+
+if(window.location.href.includes(urlQuiz)) {
+  // console.log('fbq track ' + urlQuiz);
+  fbq('track', 'Purchase', {currency: 'BRL', value: 5.00, content_name: 'Fez Optin'});
+}
+if(window.location.href.includes(urlResultados)) {
+  // console.log('fbq track ' + urlResultados);
+  fbq('track', 'Purchase', {currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz'});
+}
+if(window.location.href.includes(urlRedirecionando)) {
+  // console.log('fbq track ' + urlRedirecionando);
+  fbq('track', 'Purchase', {currency: 'BRL', value: 40.00, content_name: 'Contato WhatsApp'});
+}
+
+// Tempo na página
+var seconds = 300;
+setTimeout(function() {fbq('track', 'Purchase', {currency: 'BRL', value: 60.00, content_name: 'Tempo 5 mins'});}, seconds * 1000);
+
+
+/* DADOS UTM & REDIRECT */
+
 // Optin com dados UTM
+var content_piece = window.location.host + window.location.pathname;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
+// var content_piece = 'Vídeo 1.0 + Popup Optin';
 $(document).ready(()=>{
   $('#optinInicial button.btn').on('click',()=>{
     $('form').append(`<input type="hidden" name="field[12]" value="${urlParams.get('utm_source')}">`);
@@ -20,15 +52,88 @@ $(document).ready(()=>{
     $('form').append(`<input type="hidden" name="field[15]" value="${urlParams.get('utm_medium')}">`);
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
     $('form').append(`<input type="hidden" name="field[16]" value="${content_piece}">`);
+    if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')){
+      setTimeout(()=>{
+        window.location.href = window.location.origin + '/quiz?email=' + $('input[type="email"]').val();
+      },1000);
+    }
   });
 });
 
-// Aqui tem que pensar se consigo fazer pra todos ou página por página. Talvez 'domain' + /quiz(input email), porque seria pra esse tipo né.
-if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')){
-  setTimeout(()=>{
-    window.location.href = 'https://rf.oralbrasilportoalegre.com.br/quiz?email='+$('input[type="email"]').val();
-  },1000);
-}
 
-// Isso vai ser definido na página, assim como o link para próxima página do if se precisar
-// var content_piece = 'Vídeo 1.0 + Popup Optin';
+/* PESOS E RESPOSTAS AC */
+
+$(document).ready(()=>{
+  if(window.location.href.includes(urlQuiz)) {
+    	var soma = 0;
+    	//Define os pesos por questão:
+    	var pesos = {
+        	//"field"
+          "21" : {
+            //"resposta" : "peso"
+            "1" : "5",
+            "2" : "20",
+            "3" : "5",
+            "4" : "10",
+            "5" : "5"
+          },
+          "25" : {
+            "1" : "5",
+            "2" : "5",
+            "3" : "5",
+            "4" : "5"
+          },
+          "26" : {
+            "1" : "5",
+            "2" : "5",
+            "3" : "5",
+            "4" : "5"
+          },
+          "22" : {
+            "6" : "10",
+          },
+          "23" : {
+            "1" : "0",
+            "2" : "10",
+            "3" : "20",
+          },
+          "24" : {
+            "1" : "0",
+            "2" : "5",
+            "3" : "20",
+          }
+      }
+    	let x = true;
+	setInterval(()=>{
+        	if($('form:visible').length && x){
+            	x = false;
+            	setTimeout(()=>{
+                  $('form').on('submit',()=>{
+                    	for(let i in pesos){
+                        	if($('input[name*="field['+i+']"]')[1].type == 'radio'){
+                            	$('input[name*="field['+i+']"]').each((indice, e)=>{
+                                	let value = $('input[name*="field['+i+']"]:checked').val();
+                                	if($('input[name*="field['+i+']"]')[indice].value == value){
+                                  	soma += parseInt(pesos[i][indice+1]);
+                                  }
+                              });
+                          }
+                        	else if($('input[name*="field['+i+']"]')[1].type == 'checkbox'){
+                          	$('input[name*="field['+i+']"]:checked').each((indice, e)=>{
+                                	let value = e.value;
+                                	$('input[name*="field['+i+']"]').each((ind, elem)=>{
+                                  	if($('input[name*="field['+i+']"]')[ind].value == value){
+                                          soma += parseInt(pesos[i][indice+1]);
+                                      }
+                                  });
+                              });
+                          }
+                      }
+                    	console.log(soma);
+                      fbq('track', 'Purchase', {currency: 'BRL', value: soma, content_name: 'Respostas Quiz'});
+                  });
+              },1000);
+          }
+      },100);
+    }
+});
