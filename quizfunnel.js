@@ -1,4 +1,4 @@
-console.log('teste botao');
+// console.log('teste botao');
 
 /* SHOW / HIDE CONTENT */
 
