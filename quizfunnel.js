@@ -1,4 +1,4 @@
-// console.log('teste erro');
+console.log('teste botao');
 
 /* SHOW / HIDE CONTENT */
 
@@ -52,7 +52,7 @@ $(document).ready(()=>{
     $('form').append(`<input type="hidden" name="field[15]" value="${urlParams.get('utm_medium')}">`);
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
     $('form').append(`<input type="hidden" name="field[16]" value="${content_piece}">`);
-    if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')){
+    if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.') && $('button').hasClass('quizRedirect')) {
       setTimeout(()=>{
         window.location.href = window.location.origin + '/quiz?email=' + $('input[type="email"]').val();
       },1000);
