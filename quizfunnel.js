@@ -62,6 +62,7 @@ $(document).ready(() => {
 
   /* PESOS E RESPOSTAS AC */
 
+  // Verificar se está em uma Quiz pela URL
   if (window.location.href.includes(urlQuiz)) {
 
     // Valores das Respostas
@@ -114,6 +115,8 @@ $(document).ready(() => {
         "3": "20"
       }
     }
+    
+    // Verificar existência do form e atribui pontos (pesos)
     let x = true;
     setInterval(() => {
       if ($('form:visible').length && x) {
@@ -146,6 +149,7 @@ $(document).ready(() => {
             console.log(soma);
             fbq('track', 'Purchase', { currency: 'BRL', value: soma, content_name: 'Respostas Quiz' });
 
+            // Verifica se telefone tem dígitos e envia dados
             if (/\d/.test($('input[id="phone"]').val())) {
               formAppend(40, nomeClinica);
               formAppend(42, soma)
@@ -157,7 +161,7 @@ $(document).ready(() => {
               }, 1000);
             }
             
-            // Resetar soma
+            // Reseta soma
             soma = 0;
 
           });
@@ -165,14 +169,6 @@ $(document).ready(() => {
       }
     }, 100);
   }
-
-  // Redirect Quiz → Resultados
-  // var checkExist = setInterval(function () {
-  //   // Check if AC form button exists
-  //   if ($('button._submit').length) {
-  //     clearInterval(checkExist);
-  //   }
-  // }, 100); // check every 100ms
 
 });
 
