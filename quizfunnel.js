@@ -63,7 +63,7 @@ $(document).ready(()=>{
       clearInterval(checkExist);
 
       // #quizQuestions → /resultados
-      $('#quizQuestions button._submit').on('click',()=>{
+      $('._form-content button._submit').on('click',()=>{
         // Check if phone contains a numbers, then redirect to /resultados
         if (/\d/.test($('input[id="phone"]').val())) {
           console.log('phone is valid');
