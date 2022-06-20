@@ -162,7 +162,7 @@ $(document).ready(()=>{
           formAppend (42, soma)
           console.log(nomeClinica + " | " + soma);
           setTimeout(()=>{
-            window.location.href = window.location.origin + '/resultados?soma=' + soma;
+            // window.location.href = window.location.origin + '/resultados?soma=' + soma;
           },1000);
         }
       });
