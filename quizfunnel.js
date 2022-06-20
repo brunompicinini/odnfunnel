@@ -159,9 +159,9 @@ $(document).ready(()=>{
       $('._form-content button._submit').on('click',()=>{
         // Check if phone contains a numbers, then redirect to /resultados
         if (/\d/.test($('input[id="phone"]').val())) {
-          console.log('phone is valid');
-          // $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
-          formAppend(40,nomeClinica);
+          formAppend (40, nomeClinica);
+          formAppend (42, soma)
+          console.log(nomeClinica + " | " + soma);
           setTimeout(()=>{
             // window.location.href = window.location.origin + '/resultados?soma=' + soma;
           },1000);
