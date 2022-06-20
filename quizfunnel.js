@@ -9,6 +9,10 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
 
+function formAppend(formField, inputValue) {
+  $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
+  console.log(formField + " " + inputValue);
+}
 
 /* FBQ PURCHASES */
 
@@ -156,7 +160,8 @@ $(document).ready(()=>{
         // Check if phone contains a numbers, then redirect to /resultados
         if (/\d/.test($('input[id="phone"]').val())) {
           console.log('phone is valid');
-          $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
+          // $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
+          formAppend(40,nomeClinica);
           setTimeout(()=>{
             window.location.href = window.location.origin + '/resultados?soma=' + soma;
           },1000);
