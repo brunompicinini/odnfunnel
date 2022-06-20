@@ -1,4 +1,4 @@
-console.log('TESTS -- teste 2.1');
+console.log('TESTS -- teste 2.2');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -151,7 +151,7 @@ $(document).ready(() => {
               formAppend(42, soma)
               console.log(nomeClinica + " | " + soma);
 
-              // #quizQuestions → /resultados
+              // Quiz → /resultados
               setTimeout(() => {
                 window.location.href = window.location.origin + '/resultados?soma=' + soma;
               }, 1000);
