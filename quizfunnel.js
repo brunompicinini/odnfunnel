@@ -1,4 +1,4 @@
-console.log('final check 1.45 function');
+console.log('final check 1.46 soma');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -11,7 +11,6 @@ const urlParams = new URLSearchParams(queryString);
 
 function formAppend(formField, inputValue) {
   $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
-  console.log(formField + " " + inputValue);
 }
 
 /* FBQ PURCHASES */
@@ -163,7 +162,7 @@ $(document).ready(()=>{
           formAppend (42, soma)
           console.log(nomeClinica + " | " + soma);
           setTimeout(()=>{
-            // window.location.href = window.location.origin + '/resultados?soma=' + soma;
+            window.location.href = window.location.origin + '/resultados?soma=' + soma;
           },1000);
         }
       });
