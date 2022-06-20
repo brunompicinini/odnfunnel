@@ -1,4 +1,4 @@
-console.log('final check 1.42 main');
+console.log('final check 1.43 pesos');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -56,112 +56,114 @@ $(document).ready(()=>{
     }
   });
 
-  // Redirect Quiz → Resultados
-  var checkExist = setInterval(function() {
-    // Check if AC form button exists
-    if ($('button._submit').length) {
-      clearInterval(checkExist);
-
-      // #quizQuestions → /resultados
-      $('._form-content button._submit').on('click',()=>{
-        // Check if phone contains a numbers, then redirect to /resultados
-        if (/\d/.test($('input[id="phone"]').val())) {
-          console.log('phone is valid');
-          $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
-          setTimeout(()=>{
-            window.location.href = window.location.origin + '/resultados';
-          },1000);
-        }
-      });
-    }
-  }, 100); // check every 100ms
-
 
   /* PESOS E RESPOSTAS AC */
 
   if(window.location.href.includes(urlQuiz)) {
-    	var soma = 0;
-    	//Define os pesos por questão:
-    	var pesos = {
-        	//"field"
-          // Situação Atual
-          "21" : {
-            //"resposta" : "peso"
-            "1" : "5",
-            "2" : "20",
-            "3" : "5",
-            "4" : "10",
-            "5" : "5"
-          },
-          // Incômodos
-          "25" : {
-            "1" : "5",
-            "2" : "5",
-            "3" : "5",
-            "4" : "5"
-          },
-          // Motivação
-          "26" : {
-            "1" : "5",
-            "2" : "5",
-            "3" : "5",
-            "4" : "5"
-          },
-          // Impedimentos
-          "22" : {
-            "1" : "0",
-            "2" : "10",
-            "3" : "10",
-            "4" : "15",
-            "5" : "15",
-            "6" : "20"
-          },
-          // Finanças
-          "23" : {
-            "1" : "0",
-            "2" : "10",
-            "3" : "20"
-          },
-          // Urgência
-          "24" : {
-            "1" : "0",
-            "2" : "5",
-            "3" : "20"
+
+    // Redirect Quiz → Resultados
+    var checkExist = setInterval(function() {
+      // Check if AC form button exists
+      if ($('button._submit').length) {
+        clearInterval(checkExist);
+
+        // #quizQuestions → /resultados
+        $('._form-content button._submit').on('click',()=>{
+          // Check if phone contains a numbers, then redirect to /resultados
+          if (/\d/.test($('input[id="phone"]').val())) {
+            console.log('phone is valid');
+            $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
+            setTimeout(()=>{
+              window.location.href = window.location.origin + '/resultados';
+            },1000);
           }
+        });
       }
-    	let x = true;
-      setInterval(()=>{
-        	if($('form:visible').length && x){
-            	x = false;
-            	setTimeout(()=>{
-                  $('form').on('submit',()=>{
-                    	for(let i in pesos){
-                        	if($('input[name*="field['+i+']"]')[1].type == 'radio'){
-                            	$('input[name*="field['+i+']"]').each((indice, e)=>{
-                                	let value = $('input[name*="field['+i+']"]:checked').val();
-                                	if($('input[name*="field['+i+']"]')[indice].value == value){
-                                  	soma += parseInt(pesos[i][indice+1]);
-                                  }
-                              });
-                          }
-                        	else if($('input[name*="field['+i+']"]')[1].type == 'checkbox'){
-                          	$('input[name*="field['+i+']"]:checked').each((indice, e)=>{
-                                	let value = e.value;
-                                	$('input[name*="field['+i+']"]').each((ind, elem)=>{
-                                  	if($('input[name*="field['+i+']"]')[ind].value == value){
-                                          soma += parseInt(pesos[i][indice+1]);
-                                      }
-                                  });
-                              });
-                          }
-                      }
-                    	console.log(soma);
-                      fbq('track', 'Purchase', {currency: 'BRL', value: soma, content_name: 'Respostas Quiz'});
-                  });
-              },1000);
-          }
-      },100);
+    }, 100); // check every 100ms
+
+    // Valores das Respostas
+    var soma = 0;
+    //Define os pesos por questão:
+    var pesos = {
+        //"field"
+        // Situação Atual
+        "21" : {
+          //"resposta" : "peso"
+          "1" : "5",
+          "2" : "20",
+          "3" : "5",
+          "4" : "10",
+          "5" : "5"
+        },
+        // Incômodos
+        "25" : {
+          "1" : "5",
+          "2" : "5",
+          "3" : "5",
+          "4" : "5"
+        },
+        // Motivação
+        "26" : {
+          "1" : "5",
+          "2" : "5",
+          "3" : "5",
+          "4" : "5"
+        },
+        // Impedimentos
+        "22" : {
+          "1" : "0",
+          "2" : "10",
+          "3" : "10",
+          "4" : "15",
+          "5" : "15",
+          "6" : "20"
+        },
+        // Finanças
+        "23" : {
+          "1" : "0",
+          "2" : "10",
+          "3" : "20"
+        },
+        // Urgência
+        "24" : {
+          "1" : "0",
+          "2" : "5",
+          "3" : "20"
+        }
     }
+    let x = true;
+    setInterval(()=>{
+        if($('form:visible').length && x){
+            x = false;
+            setTimeout(()=>{
+                $('form').on('submit',()=>{
+                    for(let i in pesos){
+                        if($('input[name*="field['+i+']"]')[1].type == 'radio'){
+                            $('input[name*="field['+i+']"]').each((indice, e)=>{
+                                let value = $('input[name*="field['+i+']"]:checked').val();
+                                if($('input[name*="field['+i+']"]')[indice].value == value){
+                                  soma += parseInt(pesos[i][indice+1]);
+                                }
+                            });
+                        }
+                        else if($('input[name*="field['+i+']"]')[1].type == 'checkbox'){
+                          $('input[name*="field['+i+']"]:checked').each((indice, e)=>{
+                                let value = e.value;
+                                $('input[name*="field['+i+']"]').each((ind, elem)=>{
+                                  if($('input[name*="field['+i+']"]')[ind].value == value){
+                                        soma += parseInt(pesos[i][indice+1]);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                    console.log(soma);
+                    fbq('track', 'Purchase', {currency: 'BRL', value: soma, content_name: 'Respostas Quiz'});
+                });
+            },1000);
+        }
+    },100);
+  }
 
 });
 
