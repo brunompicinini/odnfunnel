@@ -1,4 +1,4 @@
-console.log('final check 1.41');
+console.log('final check 1.42 main');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
