@@ -1,23 +1,18 @@
-// console.log('teste botao');
+console.log('final check 1.38');
 
-/* SHOW / HIDE CONTENT */
+let urlQuiz = 'quiz';
+let urlResultados = 'resultados';
+let urlRedirecionando = 'redirecionando';
 
-// Show → Hide Content
-setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
-
-// Hide → Show Content
-setTimeout(function() {$('.odnHide').attr("style", "display: block !important")}, 7000);
-
-// Cookie 365 Days
-// if(/(^|;)\s*cookie_lp=/.test(document.cookie)){var divs=document.querySelectorAll(".odnhide");[].forEach.call(divs,function(e){e.style.setProperty("display", "block", "important")})}else document.cookie="cookie_lp=true; max-age=31536000";
+var content_piece = window.location.host + window.location.pathname;
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+// var content_piece = 'Vídeo 1.0 + Popup Optin';
 
 
 /* FBQ PURCHASES */
 
 // Purchase por página
-let urlQuiz = 'quiz';
-let urlResultados = 'resultados';
-let urlRedirecionando = 'redirecionando';
 
 if(window.location.href.includes(urlQuiz)) {
   // console.log('fbq track ' + urlQuiz);
@@ -39,12 +34,9 @@ setTimeout(function() {fbq('track', 'Purchase', {currency: 'BRL', value: 60.00, 
 
 /* DADOS UTM & REDIRECT */
 
-// Optin com dados UTM
-var content_piece = window.location.host + window.location.pathname;
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-// var content_piece = 'Vídeo 1.0 + Popup Optin';
 $(document).ready(()=>{
+
+  // Optin com dados UTM - #optinInicial
   $('#optinInicial button.btn').on('click',()=>{
     $('form').append(`<input type="hidden" name="field[12]" value="${urlParams.get('utm_source')}">`);
     $('form').append(`<input type="hidden" name="field[11]" value="${urlParams.get('utm_campaign')}">`);
@@ -52,23 +44,46 @@ $(document).ready(()=>{
     $('form').append(`<input type="hidden" name="field[15]" value="${urlParams.get('utm_medium')}">`);
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
     $('form').append(`<input type="hidden" name="field[16]" value="${content_piece}">`);
-    if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.') && $('button').hasClass('quizRedirect')) {
-      setTimeout(()=>{
-        window.location.href = window.location.origin + '/quiz?email=' + $('input[type="email"]').val();
-      },1000);
+    $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
+
+    // Check if email is valid & redirect → /quiz?email=%email%
+    if($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')) {
+      if ($('button').hasClass('optinToQuiz')) {
+        setTimeout(()=>{
+          window.location.href = window.location.origin + '/quiz?email=' + $('input[type="email"]').val();
+        },1000);
+      }
     }
   });
-});
+
+  // Redirect Quiz → Resultados
+  var checkExist = setInterval(function() {
+    // Check if AC form button exists
+    if ($('button._submit').length) {
+      clearInterval(checkExist);
+
+      // #quizQuestions → /resultados
+      $('#quizQuestions button._submit').on('click',()=>{
+        // Check if phone contains a numbers, then redirect to /resultados
+        if (/\d/.test($('input[id="phone"]').val())) {
+          console.log('phone is valid');
+          setTimeout(()=>{
+            window.location.href = window.location.origin + '/resultados';
+          },1000);
+        }
+      });
+    }
+  }, 100); // check every 100ms
 
 
-/* PESOS E RESPOSTAS AC */
+  /* PESOS E RESPOSTAS AC */
 
-$(document).ready(()=>{
   if(window.location.href.includes(urlQuiz)) {
     	var soma = 0;
     	//Define os pesos por questão:
     	var pesos = {
         	//"field"
+          // Situação Atual
           "21" : {
             //"resposta" : "peso"
             "1" : "5",
@@ -77,34 +92,44 @@ $(document).ready(()=>{
             "4" : "10",
             "5" : "5"
           },
+          // Incômodos
           "25" : {
             "1" : "5",
             "2" : "5",
             "3" : "5",
             "4" : "5"
           },
+          // Motivação
           "26" : {
             "1" : "5",
             "2" : "5",
             "3" : "5",
             "4" : "5"
           },
+          // Impedimentos
           "22" : {
-            "6" : "10",
+            "1" : "0",
+            "2" : "10",
+            "3" : "10",
+            "4" : "15",
+            "5" : "15",
+            "6" : "20"
           },
+          // Finanças
           "23" : {
             "1" : "0",
             "2" : "10",
-            "3" : "20",
+            "3" : "20"
           },
+          // Urgência
           "24" : {
             "1" : "0",
             "2" : "5",
-            "3" : "20",
+            "3" : "20"
           }
       }
     	let x = true;
-	setInterval(()=>{
+      setInterval(()=>{
         	if($('form:visible').length && x){
             	x = false;
             	setTimeout(()=>{
@@ -136,4 +161,16 @@ $(document).ready(()=>{
           }
       },100);
     }
+
 });
+
+/* SHOW / HIDE CONTENT */
+
+// Show → Hide Content
+setTimeout(function() {$('.odnShow').attr("style", "display: none !important")}, 5000);
+
+// Hide → Show Content
+setTimeout(function() {$('.odnHide').attr("style", "display: block !important")}, 7000);
+
+// Cookie 365 Days
+// if(/(^|;)\s*cookie_lp=/.test(document.cookie)){var divs=document.querySelectorAll(".odnhide");[].forEach.call(divs,function(e){e.style.setProperty("display", "block", "important")})}else document.cookie="cookie_lp=true; max-age=31536000";
