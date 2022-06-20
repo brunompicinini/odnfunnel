@@ -1,4 +1,4 @@
-console.log('final check 1.46 soma');
+console.log('final check 1.47 test if');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -142,6 +142,14 @@ $(document).ready(()=>{
                     }
                     console.log(soma);
                     fbq('track', 'Purchase', {currency: 'BRL', value: soma, content_name: 'Respostas Quiz'});
+                    if (/\d/.test($('input[id="phone"]').val())) {
+                      formAppend (40, nomeClinica);
+                      formAppend (42, soma)
+                      console.log(nomeClinica + " | " + soma);
+                      setTimeout(()=>{
+                        // window.location.href = window.location.origin + '/resultados?soma=' + soma;
+                      },1000);
+                    }
                 });
             },1000);
         }
@@ -156,15 +164,15 @@ $(document).ready(()=>{
 
       // #quizQuestions → /resultados
       $('._form-content button._submit').on('click',()=>{
-        // Check if phone contains a numbers, then redirect to /resultados
-        if (/\d/.test($('input[id="phone"]').val())) {
-          formAppend (40, nomeClinica);
-          formAppend (42, soma)
-          console.log(nomeClinica + " | " + soma);
-          setTimeout(()=>{
-            // window.location.href = window.location.origin + '/resultados?soma=' + soma;
-          },1000);
-        }
+        // // Check if phone contains a numbers, then redirect to /resultados
+        // if (/\d/.test($('input[id="phone"]').val())) {
+        //   formAppend (40, nomeClinica);
+        //   formAppend (42, soma)
+        //   console.log(nomeClinica + " | " + soma);
+        //   setTimeout(()=>{
+        //     // window.location.href = window.location.origin + '/resultados?soma=' + soma;
+        //   },1000);
+        // }
       });
     }
   }, 100); // check every 100ms
