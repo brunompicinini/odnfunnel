@@ -1,4 +1,4 @@
-console.log('final check 1.44 pesos');
+console.log('final check 1.45 function');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -163,7 +163,7 @@ $(document).ready(()=>{
           // $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
           formAppend(40,nomeClinica);
           setTimeout(()=>{
-            window.location.href = window.location.origin + '/resultados?soma=' + soma;
+            // window.location.href = window.location.origin + '/resultados?soma=' + soma;
           },1000);
         }
       });
