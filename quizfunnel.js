@@ -67,6 +67,7 @@ $(document).ready(()=>{
         // Check if phone contains a numbers, then redirect to /resultados
         if (/\d/.test($('input[id="phone"]').val())) {
           console.log('phone is valid');
+          $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
           setTimeout(()=>{
             window.location.href = window.location.origin + '/resultados';
           },1000);
