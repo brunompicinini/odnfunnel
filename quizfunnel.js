@@ -1,4 +1,4 @@
-console.log('final check 1.43 pesos');
+console.log('final check 1.44 pesos');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -60,26 +60,6 @@ $(document).ready(()=>{
   /* PESOS E RESPOSTAS AC */
 
   if(window.location.href.includes(urlQuiz)) {
-
-    // Redirect Quiz → Resultados
-    var checkExist = setInterval(function() {
-      // Check if AC form button exists
-      if ($('button._submit').length) {
-        clearInterval(checkExist);
-
-        // #quizQuestions → /resultados
-        $('._form-content button._submit').on('click',()=>{
-          // Check if phone contains a numbers, then redirect to /resultados
-          if (/\d/.test($('input[id="phone"]').val())) {
-            console.log('phone is valid');
-            $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
-            setTimeout(()=>{
-              window.location.href = window.location.origin + '/resultados';
-            },1000);
-          }
-        });
-      }
-    }, 100); // check every 100ms
 
     // Valores das Respostas
     var soma = 0;
@@ -164,6 +144,26 @@ $(document).ready(()=>{
         }
     },100);
   }
+
+  // Redirect Quiz → Resultados
+  var checkExist = setInterval(function() {
+    // Check if AC form button exists
+    if ($('button._submit').length) {
+      clearInterval(checkExist);
+
+      // #quizQuestions → /resultados
+      $('._form-content button._submit').on('click',()=>{
+        // Check if phone contains a numbers, then redirect to /resultados
+        if (/\d/.test($('input[id="phone"]').val())) {
+          console.log('phone is valid');
+          $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
+          setTimeout(()=>{
+            window.location.href = window.location.origin + '/resultados?soma=' + soma;
+          },1000);
+        }
+      });
+    }
+  }, 100); // check every 100ms
 
 });
 
