@@ -1,4 +1,4 @@
-console.log('v1.3 ignorePurchase');
+console.log('v1.3.1 ignorePurchase');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
