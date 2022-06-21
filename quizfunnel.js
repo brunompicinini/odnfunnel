@@ -182,7 +182,7 @@ $(document).ready(() => {
 
               // Quiz → /resultados
               setTimeout(() => {
-                window.location.href = window.location.origin + '/resultados;
+                window.location.href = window.location.origin + '/resultados';
               }, 1000);
             }
             
