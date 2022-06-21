@@ -43,7 +43,6 @@ setTimeout(() => {
     //   fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
     // }
   
-  
     if (window.location.href.includes(urlResultados)) {
       // console.log('fbq track ' + urlResultados);
       fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
