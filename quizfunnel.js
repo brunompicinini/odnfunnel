@@ -1,4 +1,4 @@
-console.log('v1.3.5.4 ignorePurchase setTimeout 200 & var nomeClinica');
+console.log('v1.2.2 erro nomeClinica');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -8,17 +8,6 @@ let currentUrl = window.location.host + window.location.pathname;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
-
-
-// Definir nomeClinica se não existe
-
-if (typeof nomeClinica !== 'undefined' && nomeClinica) {
-  console.log('nome Clinica está definido');
-}
-else {
-  // console.log('pobrema');
-  var nomeClinica = 'Sem clínica';
-}
 
 function formAppend(formField, inputValue) {  
     $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
@@ -30,6 +19,17 @@ function formAppend(formField, inputValue) {
 // Purchase por página
 
 setTimeout(() => {
+
+  // Verifica nomeClinica, senão define
+  if (typeof nomeClinica !== 'undefined' && nomeClinica) {
+    console.log('nome Clinica está definido');
+  }
+  else {
+    // console.log('pobrema');
+    var nomeClinica = 'Sem clínica';
+  }
+
+  // Verifica ignorePurchase
   if (typeof ignorePurchase !== 'undefined' && ignorePurchase) {
     console.log('ignore Purchase true');
   }
