@@ -1,34 +1,59 @@
-console.log('TESTS -- teste 2.2');
+console.log('v1.3.5.4 ignorePurchase setTimeout 200 & var nomeClinica');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
 let urlRedirecionando = 'redirecionando';
 
-var content_piece = window.location.host + window.location.pathname;
+let currentUrl = window.location.host + window.location.pathname;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
 
-function formAppend(formField, inputValue) {
-  $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
+
+// Definir nomeClinica se não existe
+
+if (typeof nomeClinica !== 'undefined' && nomeClinica) {
+  console.log('nome Clinica está definido');
 }
+else {
+  // console.log('pobrema');
+  var nomeClinica = 'Sem clínica';
+}
+
+function formAppend(formField, inputValue) {  
+    $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
+}
+ 
 
 /* FBQ PURCHASES */
 
 // Purchase por página
 
-if (window.location.href.includes(urlQuiz)) {
-  // console.log('fbq track ' + urlQuiz);
-  fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
-}
-if (window.location.href.includes(urlResultados)) {
-  // console.log('fbq track ' + urlResultados);
-  fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
-}
-if (window.location.href.includes(urlRedirecionando)) {
-  // console.log('fbq track ' + urlRedirecionando);
-  fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
-}
+setTimeout(() => {
+  if (typeof ignorePurchase !== 'undefined' && ignorePurchase) {
+    console.log('ignore Purchase true');
+  }
+  else {
+    console.log('ignore Purchase false');
+  
+    // *** CONVERSÃO QUIZ DESLIGADA ***
+  
+    // if (window.location.href.includes(urlQuiz)) {
+    //   // console.log('fbq track ' + urlQuiz);
+    //   fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
+    // }
+  
+    if (window.location.href.includes(urlResultados)) {
+      // console.log('fbq track ' + urlResultados);
+      fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
+    }
+    if (window.location.href.includes(urlRedirecionando)) {
+      // console.log('fbq track ' + urlRedirecionando);
+      fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
+    }
+  }
+}, 200);
+
 
 // Tempo na página
 var seconds = 300;
@@ -46,8 +71,8 @@ $(document).ready(() => {
     $('form').append(`<input type="hidden" name="field[13]" value="${urlParams.get('utm_term')}">`);
     $('form').append(`<input type="hidden" name="field[15]" value="${urlParams.get('utm_medium')}">`);
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
-    $('form').append(`<input type="hidden" name="field[16]" value="${content_piece}">`);
-    $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
+    $('form').append(`<input type="hidden" name="field[16]" value="${currentUrl}">`);
+    formAppend(40, nomeClinica);
 
     // Check if email is valid & redirect → /quiz?email=%email%
     if ($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')) {
