@@ -1,4 +1,4 @@
-console.log('v1.2.6 fixes');
+console.log('v1.2.7 fixes + CSS');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
@@ -36,16 +36,16 @@ setTimeout(() => {
     // *** CONVERSÃO QUIZ DESLIGADA ***
 
     if (window.location.href.includes(urlQuiz)) {
-      console.log('fbq Purchase: Fez Optin. URL: ' + urlQuiz);
+      console.log(`fbq Purchase: \$5, Fez Optin. URL: ${urlQuiz}`);
       fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
     }
 
     if (window.location.href.includes(urlResultados)) {
-      console.log('fbq Purchase: Fez Optin. URL: ' + urlResultados);
+      console.log(`fbq Purchase: \$20, Preencheu Quiz. URL: ${urlResultados}`);
       fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
     }
     if (window.location.href.includes(urlRedirecionando)) {
-      console.log('fbq Purchase: Fez Optin. URL: ' + urlRedirecionando);
+      console.log(`fbq Purchase: \$50, Contato WhatsApp. URL: ${urlRedirecionando}`);
       fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
     }
   }
