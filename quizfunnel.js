@@ -1,4 +1,4 @@
-console.log('v1.3.3 ignorePurchase');
+console.log('v1.3.4 ignorePurchase');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -19,11 +19,11 @@ function formAppend(formField, inputValue) {
 
 // Purchase por página
 
-if (window.ignorePurchase) {
-  console.log('ignorePurchase ativo');
+if (typeof ignorePurchase !== 'undefined' && ignorePurchase) {
+  console.log('ignore Purchase true');
 }
 else {
-  console.log('ignorePurchase false');
+  console.log('ignore Purchase false');
 
   // *** CONVERSÃO QUIZ DESLIGADA ***
 
