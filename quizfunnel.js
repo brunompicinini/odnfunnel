@@ -1,4 +1,4 @@
-console.log('v1.3.5.3 ignorePurchase setTimeout 200 & var nomeClinica');
+console.log('v1.3.5.4 ignorePurchase setTimeout 200 & var nomeClinica');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -16,7 +16,7 @@ if (typeof nomeClinica !== 'undefined' && nomeClinica) {
   console.log('nome Clinica está definido');
 }
 else {
-  console.log('pobrema');
+  // console.log('pobrema');
   var nomeClinica = 'Sem clínica';
 }
 
