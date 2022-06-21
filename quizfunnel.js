@@ -9,7 +9,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
 
-let ignorePurchase;
+// let ignorePurchase;
 
 function formAppend(formField, inputValue) {
   $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
@@ -23,6 +23,7 @@ if (ignorePurchase) {
   console.log('ignorePurchase ativo');
 }
 else {
+  let ignorePurchase = false;
   if (window.location.href.includes(urlQuiz)) {
     // console.log('fbq track ' + urlQuiz);
     fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
