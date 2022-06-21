@@ -1,4 +1,4 @@
-console.log('v1.3.5 ignorePurchase setTimeout');
+console.log('v1.3.5.1 ignorePurchase setTimeout 200');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -43,7 +43,7 @@ setTimeout(() => {
       fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
     }
   }
-}, 100);
+}, 200);
 
 
 // Tempo na página
