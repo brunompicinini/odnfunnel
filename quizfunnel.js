@@ -4,10 +4,12 @@ let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
 let urlRedirecionando = 'redirecionando';
 
-var content_piece = window.location.host + window.location.pathname;
+let currentUrl = window.location.host + window.location.pathname;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
+
+let ignorePurchase = false;
 
 function formAppend(formField, inputValue) {
   $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
@@ -51,7 +53,7 @@ $(document).ready(() => {
     $('form').append(`<input type="hidden" name="field[13]" value="${urlParams.get('utm_term')}">`);
     $('form').append(`<input type="hidden" name="field[15]" value="${urlParams.get('utm_medium')}">`);
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
-    $('form').append(`<input type="hidden" name="field[16]" value="${content_piece}">`);
+    $('form').append(`<input type="hidden" name="field[16]" value="${currentUrl}">`);
     $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
 
     // Check if email is valid & redirect → /quiz?email=%email%
