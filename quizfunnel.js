@@ -1,4 +1,4 @@
-console.log('v1.3.4 ignorePurchase');
+console.log('v1.3.5 ignorePurchase setTimeout');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -19,29 +19,32 @@ function formAppend(formField, inputValue) {
 
 // Purchase por página
 
-if (typeof ignorePurchase !== 'undefined' && ignorePurchase) {
-  console.log('ignore Purchase true');
-}
-else {
-  console.log('ignore Purchase false');
-
-  // *** CONVERSÃO QUIZ DESLIGADA ***
-
-  // if (window.location.href.includes(urlQuiz)) {
-  //   // console.log('fbq track ' + urlQuiz);
-  //   fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
-  // }
-
-
-  if (window.location.href.includes(urlResultados)) {
-    // console.log('fbq track ' + urlResultados);
-    fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
+setTimeout(() => {
+  if (typeof ignorePurchase !== 'undefined' && ignorePurchase) {
+    console.log('ignore Purchase true');
   }
-  if (window.location.href.includes(urlRedirecionando)) {
-    // console.log('fbq track ' + urlRedirecionando);
-    fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
+  else {
+    console.log('ignore Purchase false');
+  
+    // *** CONVERSÃO QUIZ DESLIGADA ***
+  
+    // if (window.location.href.includes(urlQuiz)) {
+    //   // console.log('fbq track ' + urlQuiz);
+    //   fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
+    // }
+  
+  
+    if (window.location.href.includes(urlResultados)) {
+      // console.log('fbq track ' + urlResultados);
+      fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
+    }
+    if (window.location.href.includes(urlRedirecionando)) {
+      // console.log('fbq track ' + urlRedirecionando);
+      fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
+    }
   }
-}
+}, 100);
+
 
 // Tempo na página
 var seconds = 300;
