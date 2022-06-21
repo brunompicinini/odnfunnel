@@ -1,4 +1,4 @@
-console.log('v1.2.5 comments');
+console.log('v1.2.6 fixes');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
@@ -12,48 +12,40 @@ let currentUrl = window.location.host + window.location.pathname;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
-function formAppend(formField, inputValue) {  
-    $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
+// Form Append function for Active Campaign Forms
+function formAppend(formField, inputValue) {
+  $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
 }
- 
+
 
 // ----------------------
 // FBQ PURCHASES
 // ----------------------
 
-// Purchase por página
-
 setTimeout(() => {
-
-  // Verifica nomeClinica, senão define
-  if (typeof nomeClinica !== 'undefined' && nomeClinica) {
-    console.log('nome Clinica está definido');
-  }
-  else {
-    // console.log('pobrema');
-    var nomeClinica = 'Sem clínica';
-  }
 
   // Verifica ignorePurchase
   if (typeof ignorePurchase !== 'undefined' && ignorePurchase) {
     console.log('ignore Purchase true');
   }
+
+  // Purchase por página
   else {
     console.log('ignore Purchase false');
-  
+
     // *** CONVERSÃO QUIZ DESLIGADA ***
-  
-    // if (window.location.href.includes(urlQuiz)) {
-    //   // console.log('fbq track ' + urlQuiz);
-    //   fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
-    // }
-  
+
+    if (window.location.href.includes(urlQuiz)) {
+      console.log('fbq Purchase: Fez Optin. URL: ' + urlQuiz);
+      fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
+    }
+
     if (window.location.href.includes(urlResultados)) {
-      // console.log('fbq track ' + urlResultados);
+      console.log('fbq Purchase: Fez Optin. URL: ' + urlResultados);
       fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
     }
     if (window.location.href.includes(urlRedirecionando)) {
-      // console.log('fbq track ' + urlRedirecionando);
+      console.log('fbq Purchase: Fez Optin. URL: ' + urlRedirecionando);
       fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
     }
   }
@@ -62,7 +54,9 @@ setTimeout(() => {
 
 // Tempo na página
 var seconds = 300;
-setTimeout(function () { fbq('track', 'Purchase', { currency: 'BRL', value: 60.00, content_name: 'Tempo 5 mins' }); }, seconds * 1000);
+setTimeout(function () {
+  fbq('track', 'Purchase', { currency: 'BRL', value: 60.00, content_name: 'Tempo 5 mins' });
+}, seconds * 1000);
 
 
 // ----------------------
@@ -79,7 +73,18 @@ $(document).ready(() => {
     $('form').append(`<input type="hidden" name="field[15]" value="${urlParams.get('utm_medium')}">`);
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
     $('form').append(`<input type="hidden" name="field[16]" value="${currentUrl}">`);
-    formAppend(40, nomeClinica);
+
+    // Verifica nomeClinica, senão define
+    if (typeof nomeClinica !== 'undefined' && nomeClinica) {
+      console.log('Nome da Clínica: ' + nomeClinica);
+      // formAppend(40, nomeClinica);
+    }
+    else {
+      console.log('Nome da Clínica NÃO está definido.');
+      let nomeClinica = 'Sem clínica';
+      // formAppend(40, nomeClinica);
+    }
+
 
     // Check if email is valid & redirect → /quiz?email=%email%
     if ($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')) {
@@ -92,9 +97,9 @@ $(document).ready(() => {
   });
 
 
-// ----------------------
-// PESOS E RESPOSTAS QUIZ
-// ----------------------
+  // ----------------------
+  // PESOS E RESPOSTAS QUIZ
+  // ----------------------
 
   // Verificar se está em uma Quiz pela URL
   if (window.location.href.includes(urlQuiz)) {
@@ -149,7 +154,7 @@ $(document).ready(() => {
         "3": "20"
       }
     }
-    
+
     // Verificar existência do form e atribui pontos (pesos)
     let x = true;
     setInterval(() => {
@@ -194,7 +199,7 @@ $(document).ready(() => {
                 window.location.href = window.location.origin + '/resultados';
               }, 1000);
             }
-            
+
             // Reseta soma
             soma = 0;
 
