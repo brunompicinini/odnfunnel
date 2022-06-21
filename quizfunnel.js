@@ -9,7 +9,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
 
-// let ignorePurchase = false;
+let ignorePurchase;
 
 function formAppend(formField, inputValue) {
   $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
