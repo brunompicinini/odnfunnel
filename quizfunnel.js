@@ -1,4 +1,4 @@
-console.log('v1.2.7 fixes + CSS');
+console.log('v1.2.8 fixes + CSS');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
@@ -85,7 +85,6 @@ $(document).ready(() => {
       // formAppend(40, nomeClinica);
     }
 
-
     // Check if email is valid & redirect → /quiz?email=%email%
     if ($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')) {
       if ($('button').hasClass('optinToQuiz')) {
@@ -161,7 +160,6 @@ $(document).ready(() => {
       if ($('form:visible').length && x) {
         x = false;
         setTimeout(() => {
-          // $('form').on('submit',()=>{
           $('._form-content button._submit').on('click', () => {
             for (let i in pesos) {
               if ($('input[name*="field[' + i + ']"]')[1].type == 'radio') {
@@ -185,14 +183,13 @@ $(document).ready(() => {
             }
 
             // Send purchase track event to FB
-            console.log(soma);
+            console.log(nomeClinica + " | " + soma);
             fbq('track', 'Purchase', { currency: 'BRL', value: soma, content_name: 'Respostas Quiz' });
 
             // Verifica se telefone tem dígitos e envia dados
             if (/\d/.test($('input[id="phone"]').val())) {
               formAppend(40, nomeClinica);
               formAppend(42, soma)
-              console.log(nomeClinica + " | " + soma);
 
               // Quiz → /resultados
               setTimeout(() => {

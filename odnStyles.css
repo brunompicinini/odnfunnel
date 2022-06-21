@@ -1,7 +1,15 @@
+/* General stuff */
+.bpTitleCase {text-transform: capitalize !important;}
+html {font-weight: 300;}
+form._form {font-weight: 500;}
+
+/* Footer links */
 .bpfooter a {text-decoration: none !important;}
 .bpfooter a:hover {text-decoration: underline !important;}
-.bpTitleCase {text-transform: capitalize !important;}
-.fynuxm {top: 2px !important;}
-html {font-weight: 300;}
+
+/* Show and hide stuff  */
 .odnShow {display: block !important;}
 .odnHide {display: none !important;}
+
+/* Video margin */
+.fynuxm {top: 2px !important;}
