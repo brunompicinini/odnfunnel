@@ -1,4 +1,8 @@
-console.log('v1.2.3 removido soma');
+console.log('v1.2.5 comments');
+
+// ----------------------
+// BASIC VARIABLES & FUNCTIONS
+// ----------------------
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -7,14 +11,15 @@ let urlRedirecionando = 'redirecionando';
 let currentUrl = window.location.host + window.location.pathname;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-// var content_piece = 'Vídeo 1.0 + Popup Optin';
 
 function formAppend(formField, inputValue) {  
     $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
 }
  
 
-/* FBQ PURCHASES */
+// ----------------------
+// FBQ PURCHASES
+// ----------------------
 
 // Purchase por página
 
@@ -60,7 +65,9 @@ var seconds = 300;
 setTimeout(function () { fbq('track', 'Purchase', { currency: 'BRL', value: 60.00, content_name: 'Tempo 5 mins' }); }, seconds * 1000);
 
 
-/* DADOS UTM & REDIRECT */
+// ----------------------
+// DADOS UTM & REDIRECT
+// ----------------------
 
 $(document).ready(() => {
 
@@ -85,7 +92,9 @@ $(document).ready(() => {
   });
 
 
-  /* PESOS E RESPOSTAS AC */
+// ----------------------
+// PESOS E RESPOSTAS QUIZ
+// ----------------------
 
   // Verificar se está em uma Quiz pela URL
   if (window.location.href.includes(urlQuiz)) {
@@ -197,7 +206,9 @@ $(document).ready(() => {
 
 });
 
-/* SHOW / HIDE CONTENT */
+// ----------------------
+// SHOW / HIDE CONTENT
+// ----------------------
 
 // Show → Hide Content
 setTimeout(function () { $('.odnShow').attr("style", "display: none !important") }, 5000);
