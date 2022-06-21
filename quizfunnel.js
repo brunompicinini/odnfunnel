@@ -1,4 +1,4 @@
-console.log('v1.3.5.1 ignorePurchase setTimeout 200');
+console.log('v1.3.5.3 ignorePurchase setTimeout 200 & var nomeClinica');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -9,11 +9,21 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // var content_piece = 'Vídeo 1.0 + Popup Optin';
 
-// let ignorePurchase;
 
-function formAppend(formField, inputValue) {
-  $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
+// Definir nomeClinica se não existe
+
+if (typeof nomeClinica !== 'undefined' && nomeClinica) {
+  console.log('nome Clinica está definido');
 }
+else {
+  console.log('pobrema');
+  var nomeClinica = 'Sem clínica';
+}
+
+function formAppend(formField, inputValue) {  
+    $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
+}
+ 
 
 /* FBQ PURCHASES */
 
@@ -63,7 +73,7 @@ $(document).ready(() => {
     $('form').append(`<input type="hidden" name="field[15]" value="${urlParams.get('utm_medium')}">`);
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
     $('form').append(`<input type="hidden" name="field[16]" value="${currentUrl}">`);
-    $('form').append(`<input type="hidden" name="field[40]" value="${nomeClinica}">`);
+    formAppend(40, nomeClinica);
 
     // Check if email is valid & redirect → /quiz?email=%email%
     if ($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')) {
