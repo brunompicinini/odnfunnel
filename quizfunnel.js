@@ -1,4 +1,4 @@
-console.log('v1.2.2 erro nomeClinica');
+console.log('v1.2.3 removido soma');
 
 let urlQuiz = 'quiz';
 let urlResultados = 'resultados';
@@ -182,7 +182,7 @@ $(document).ready(() => {
 
               // Quiz → /resultados
               setTimeout(() => {
-                window.location.href = window.location.origin + '/resultados?soma=' + soma;
+                window.location.href = window.location.origin + '/resultados;
               }, 1000);
             }
             
