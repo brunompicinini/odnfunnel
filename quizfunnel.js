@@ -1,4 +1,4 @@
-console.log('v1.2.8 fixes + CSS');
+console.log('v1.2.9 formAppend(40, nomeClinica);');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
@@ -32,8 +32,6 @@ setTimeout(() => {
   // Purchase por página
   else {
     console.log('ignore Purchase false');
-
-    // *** CONVERSÃO QUIZ DESLIGADA ***
 
     if (window.location.href.includes(urlQuiz)) {
       console.log(`fbq Purchase: \$5, Fez Optin. URL: ${urlQuiz}`);
@@ -77,12 +75,12 @@ $(document).ready(() => {
     // Verifica nomeClinica, senão define
     if (typeof nomeClinica !== 'undefined' && nomeClinica) {
       console.log('Nome da Clínica: ' + nomeClinica);
-      // formAppend(40, nomeClinica);
+      formAppend(40, nomeClinica);
     }
     else {
       console.log('Nome da Clínica NÃO está definido.');
       let nomeClinica = 'Sem clínica';
-      // formAppend(40, nomeClinica);
+      formAppend(40, nomeClinica);
     }
 
     // Check if email is valid & redirect → /quiz?email=%email%
