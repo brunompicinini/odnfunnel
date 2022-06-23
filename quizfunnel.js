@@ -1,4 +1,4 @@
-console.log('v1.3.1.1 quiz&form');
+console.log('v1.3.1.2 quiz&form');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
@@ -152,9 +152,9 @@ $(document).ready(() => {
       },
       // Finanças
       "23": {
-        "1": "0",
+        "1": "-20",
         "2": "10",
-        "3": "20"
+        "3": "40"
       },
       // Urgência
       "24": {
@@ -193,12 +193,27 @@ $(document).ready(() => {
             }
 
             // Send purchase track event to FB
-            console.log(nomeClinica + " | " + soma);
+            console.log('Quiz Score: ' + soma);
             fbq('track', 'Purchase', { currency: 'BRL', value: soma, content_name: 'Respostas Quiz' });
 
             // Verifica se telefone tem dígitos e envia dados
             if (/\d/.test($('input[id="phone"]').val())) {
-              formAppend(40, nomeClinica);
+
+              // Verifica nomeClinica, senão define
+
+              // Preciso corrigir isso pra criar função e não repetir toda vez
+
+              if (typeof nomeClinica !== 'undefined' && nomeClinica) {
+                console.log('Nome da Clínica: ' + nomeClinica);
+                formAppend(40, nomeClinica);
+              }
+              else {
+                console.log('Nome da Clínica NÃO estava definido.');
+                let nomeClinica = 'Sem clínica';
+                formAppend(40, nomeClinica);
+              }
+
+              // Manda soma junto
               formAppend(42, soma)
 
               // Quiz || Form → /resultados
