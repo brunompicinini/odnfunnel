@@ -1,4 +1,4 @@
-console.log('v1.3 quiz&form');
+console.log('v1.3.1 quiz&form');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
@@ -111,7 +111,7 @@ $(document).ready(() => {
   // ----------------------
 
   // Verificar se está em uma Quiz pela URL
-  if (window.location.href.includes(urlQuiz)) {
+  if (window.location.href.includes(urlQuiz) || window.location.href.includes(urlForm)) {
 
     // Valores das Respostas
     var soma = 0;
@@ -201,7 +201,7 @@ $(document).ready(() => {
               formAppend(40, nomeClinica);
               formAppend(42, soma)
 
-              // Quiz → /resultados
+              // Quiz || Form → /resultados
               setTimeout(() => {
                 window.location.href = window.location.origin + '/resultados';
               }, 1000);
