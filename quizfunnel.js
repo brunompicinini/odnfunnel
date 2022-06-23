@@ -1,4 +1,4 @@
-console.log('v1.2.9 formAppend(40, nomeClinica);');
+console.log('v1.2.9.1 test cache');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
