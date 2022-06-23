@@ -1,7 +1,7 @@
-console.log('v1.3.1.2 quiz&form');
+console.log('v1.3.1.3 checkClinica');
 
 // ----------------------
-// BASIC VARIABLES & FUNCTIONS
+// BASIC VARIABLES
 // ----------------------
 
 let urlLead = 'lead';
@@ -17,6 +17,25 @@ const urlParams = new URLSearchParams(queryString);
 // Form Append function for Active Campaign Forms
 function formAppend(formField, inputValue) {
   $('form').append(`<input type="hidden" name="field[` + formField + `]" value="` + inputValue + `">`);
+}
+
+
+// ----------------------
+// BASIC FUNCTIONS
+// ----------------------
+
+// Verificar se nome da clínica existe
+function checkClinica() {
+  if (typeof nomeClinica !== 'undefined' && nomeClinica) {
+    console.log('Nome da Clínica: ' + nomeClinica);
+    formAppend(40, nomeClinica);
+  }
+  else {
+    console.log('Nome da Clínica NÃO estava definido.');
+    let nomeClinica = 'Sem clínica';
+    console.log(nomeClinica);
+    formAppend(40, nomeClinica);
+  }
 }
 
 
@@ -77,6 +96,8 @@ $(document).ready(() => {
 
   // Optin com dados UTM - #optinInicial
   $('#optinInicial button.btn').on('click', () => {
+
+    // Dados básicos
     $('form').append(`<input type="hidden" name="field[12]" value="${urlParams.get('utm_source')}">`);
     $('form').append(`<input type="hidden" name="field[11]" value="${urlParams.get('utm_campaign')}">`);
     $('form').append(`<input type="hidden" name="field[13]" value="${urlParams.get('utm_term')}">`);
@@ -84,16 +105,8 @@ $(document).ready(() => {
     $('form').append(`<input type="hidden" name="field[14]" value="${urlParams.get('utm_content')}">`);
     $('form').append(`<input type="hidden" name="field[16]" value="${currentUrl}">`);
 
-    // Verifica nomeClinica, senão define
-    if (typeof nomeClinica !== 'undefined' && nomeClinica) {
-      console.log('Nome da Clínica: ' + nomeClinica);
-      formAppend(40, nomeClinica);
-    }
-    else {
-      console.log('Nome da Clínica NÃO está definido.');
-      let nomeClinica = 'Sem clínica';
-      formAppend(40, nomeClinica);
-    }
+    // Verifica nomeClinica, senão define e envia
+    checkClinica();
 
     // Check if email is valid & redirect → /quiz?email=%email%
     if ($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')) {
@@ -199,19 +212,8 @@ $(document).ready(() => {
             // Verifica se telefone tem dígitos e envia dados
             if (/\d/.test($('input[id="phone"]').val())) {
 
-              // Verifica nomeClinica, senão define
-
-              // Preciso corrigir isso pra criar função e não repetir toda vez
-
-              if (typeof nomeClinica !== 'undefined' && nomeClinica) {
-                console.log('Nome da Clínica: ' + nomeClinica);
-                formAppend(40, nomeClinica);
-              }
-              else {
-                console.log('Nome da Clínica NÃO estava definido.');
-                let nomeClinica = 'Sem clínica';
-                formAppend(40, nomeClinica);
-              }
+              // Verifica nomeClinica, senão define e envia
+              checkClinica();
 
               // Manda soma junto
               formAppend(42, soma)
