@@ -1,4 +1,4 @@
-console.log('v1.3.1 quiz&form');
+console.log('v1.3.1.1 quiz&form');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
@@ -43,7 +43,7 @@ setTimeout(() => {
 
     // Form = $10 + on.submit(x) (porque é geralmente 3º página)
     if (window.location.href.includes(urlForm)) {
-      console.log(`fbq Purchase: \$0, Preencheu Quiz. URL: ${urlForm}`);
+      console.log(`fbq Purchase: \$10, Chegou no Form. URL: ${urlForm}`);
       fbq('track', 'Purchase', { currency: 'BRL', value: 10.00, content_name: 'Chegou no Form' });
     }
 
@@ -110,7 +110,7 @@ $(document).ready(() => {
   // PESOS E RESPOSTAS QUIZ
   // ----------------------
 
-  // Verificar se está em uma Quiz pela URL
+  // Verificar se está em uma Quiz ou Form pela URL
   if (window.location.href.includes(urlQuiz) || window.location.href.includes(urlForm)) {
 
     // Valores das Respostas
