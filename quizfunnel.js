@@ -1,10 +1,12 @@
-console.log('v1.2.9.1 test cache');
+console.log('v1.3 quiz&form');
 
 // ----------------------
 // BASIC VARIABLES & FUNCTIONS
 // ----------------------
 
+let urlLead = 'lead';
 let urlQuiz = 'quiz';
+let urlForm = 'form';
 let urlResultados = 'resultados';
 let urlRedirecionando = 'redirecionando';
 
@@ -33,15 +35,25 @@ setTimeout(() => {
   else {
     console.log('ignore Purchase false');
 
-    if (window.location.href.includes(urlQuiz)) {
-      console.log(`fbq Purchase: \$5, Fez Optin. URL: ${urlQuiz}`);
+    // Quiz || Lead = $5 (optin básico)
+    if (window.location.href.includes(urlQuiz) || window.location.href.includes(urlLead)) {
+      console.log(`fbq Purchase: \$5, Fez Optin. URL: ${urlQuiz} || ${urlLead}`);
       fbq('track', 'Purchase', { currency: 'BRL', value: 5.00, content_name: 'Fez Optin' });
     }
 
+    // Form = $10 + on.submit(x) (porque é geralmente 3º página)
+    if (window.location.href.includes(urlForm)) {
+      console.log(`fbq Purchase: \$0, Preencheu Quiz. URL: ${urlForm}`);
+      fbq('track', 'Purchase', { currency: 'BRL', value: 10.00, content_name: 'Chegou no Form' });
+    }
+
+    // Resultados = $20 (preencheu quiz)
     if (window.location.href.includes(urlResultados)) {
       console.log(`fbq Purchase: \$20, Preencheu Quiz. URL: ${urlResultados}`);
       fbq('track', 'Purchase', { currency: 'BRL', value: 20.00, content_name: 'Preencheu Quiz' });
     }
+
+    // Redirecionanndo pro Whats = $50
     if (window.location.href.includes(urlRedirecionando)) {
       console.log(`fbq Purchase: \$50, Contato WhatsApp. URL: ${urlRedirecionando}`);
       fbq('track', 'Purchase', { currency: 'BRL', value: 50.00, content_name: 'Contato WhatsApp' });
