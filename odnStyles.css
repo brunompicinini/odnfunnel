@@ -25,10 +25,26 @@ hr {
 
 .h1Class {
     font-weight: bold;
+    font-size: 1.8em;
+    text-align: center;
+    line-height: 1.3em;
+    text-transform: capitalize;
+}
+
+.h2Class {
+    font-weight: bold;
     font-size: 1.6em;
     text-align: center;
     line-height: 1.3em;
     text-transform: capitalize;
+    color: #30373e;
+}
+
+.h3Class {
+    font-weight: normal;
+    font-size: 1.4em;
+    text-align: center;
+    line-height: 1.3em;
 }
 
 

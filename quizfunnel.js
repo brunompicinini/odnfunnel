@@ -1,4 +1,4 @@
-console.log('v1.3.2.4 fireFbq+stuff');
+console.log('v1.3.2.5 fireFbq+headings');
 
 // ----------------------
 // BASIC VARIABLES
@@ -131,7 +131,7 @@ $(document).ready(function () {
   // REPLACEMENTS
   // ----------------------
 
-  // Heading #1 (#h1)
+  // Heading #h1
   $("b:contains('#h1')").each(function () {
     $(this).addClass("h1Class");
     $(this).parent().css("text-align", "center");
@@ -140,8 +140,31 @@ $(document).ready(function () {
     });
   });
 
+  // Heading #h2
+  $("b:contains('#h2')").each(function () {
+    $(this).addClass("h2Class");
+    $(this).parent().css("text-align", "center");
+    $(this).text(function () {
+      return $(this).text().replace("#h2", "");
+    });
+  });
+
+  // Heading #h3
+  $("b:contains('#h3')").each(function () {
+    $(this).addClass("h3Class");
+    $(this).parent().css("text-align", "center");
+    $(this).text(function () {
+      return $(this).text().replace("#h3", "");
+    });
+  });
+
   // Horizontal Line (<hr />)
-  $('div.hrLine').find('div').eq(1).html('<hr />');
+
+  // Old solution
+  // $('div.hrLine').find('div').eq(1).html('<hr />');
+
+  // New solution
+  $('div:contains("* * *"):not(:has(> div))').html('<hr />');
 
 
   // ----------------------
