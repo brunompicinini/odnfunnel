@@ -1,4 +1,4 @@
-console.log('v1.3.2.5 fireFbq+headings');
+console.log('v1.3.2.6 bugs');
 
 // ----------------------
 // BASIC VARIABLES
@@ -199,13 +199,13 @@ $(document).ready(function () {
     // Esperar botão ficar disponível.
     setTimeout(() => {
 
+      // Dados básicos
+      formAllAppends();
+
       // Aqui é ok ser botão genérico porque o botão do popup tá ali antes.
       $('button.btn').on('click', () => {
 
         console.log('Clicou button.btn');
-
-        // Dados básicos
-        formAllAppends();
 
         // Check if email is valid & redirect → /quiz?email=%email%
         if ($('input[type="email"]').val().includes('@') && $('input[type="email"]').val().includes('.')) {
@@ -216,7 +216,7 @@ $(document).ready(function () {
           }
         }
       });
-    }, 100);
+    }, 1000);
   });
 
 
