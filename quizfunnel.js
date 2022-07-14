@@ -1,4 +1,4 @@
-console.log('v1.3.2.6 bugs');
+console.log('v1.3.2.7 purchasenegativa');
 
 // ----------------------
 // BASIC VARIABLES
@@ -273,14 +273,14 @@ $(document).ready(function () {
 
       // Finanças
       "23": {
-        "1": "-20",
+        "1": "20",
         "2": "10",
         "3": "40"
       },
 
       // Urgência
       "24": {
-        "1": "-10",
+        "1": "10",
         "2": "5",
         "3": "30"
       }
